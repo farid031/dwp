@@ -35,4 +35,35 @@ class M_data extends CI_Model
         $db = $this->load->database('default', true);
         $db->truncate($table);
     }
+
+    public function getLeadByAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                customers
+                LEFT JOIN customer_status ON cust_status = stat_cust_id
+            WHERE
+                cust_is_customer IS NOT TRUE"
+        );
+
+        return $query;
+    }
+
+    public function getLeadByUser($id_user)
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                customers
+                LEFT JOIN customer_status ON cust_status = stat_cust_id
+            WHERE
+                cust_is_customer IS NOT TRUE
+                AND cust_created_by = ".$id_user
+        );
+
+        return $query;
+    }
 }

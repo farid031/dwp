@@ -66,12 +66,23 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li>
-                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
+                    <?php if ($this->uri->segment(1) == 'C_beranda') { ?>
+                        <li class="active"><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                    <?php } else { ?>
+                        <li><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                    <?php } ?>
+                    <?php if ($this->uri->segment(1) == 'C_lead') { ?> <li class="active">
+                        <a href="<?php echo base_url('C_lead') ?>">
                             <i class="fa fa-th"></i> <span>Lead</span>
                         </a>
-                    </li>
+                        </li>
+                    <?php } else { ?>
+                        <li>
+                            <a href="<?php echo base_url('C_lead') ?>">
+                                <i class="fa fa-th"></i> <span>Lead</span>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
                             <i class="fa fa-th"></i> <span>Layanan</span>

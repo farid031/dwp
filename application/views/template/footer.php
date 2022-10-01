@@ -229,8 +229,13 @@
 <script src="<?php echo base_url('assets/template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') ?>"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url('assets/template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') ?>"></script>
+<!-- DataTables -->
+<script src="<?php echo base_url('assets/template/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/template/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
 <!-- Slimscroll -->
 <script src="<?php echo base_url('assets/template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
+<!-- select2 -->
+<script src="<?php echo base_url('assets/template/bower_components/select2/dist/js/select2.full.min.js') ?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/template/bower_components/fastclick/lib/fastclick.js') ?>"></script>
 <!-- AdminLTE App -->
@@ -239,6 +244,39 @@
 <script src="<?php echo base_url('assets/template/dist/js/pages/dashboard.js') ?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('assets/template/dist/js/demo.js') ?>"></script>
+<!-- Font Awesome -->
+<script src="<?php echo base_url('assets/template/bower_components/font-awesome-5.15.4/js/fontawesome.min.js') ?>"></script>
+
+<script type="text/javascript">
+    function hapusLead(id_lead) {
+        if (window.confirm('Apakah Anda yakin akan menghapus data ini?')) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_lead/hapus_lead'); ?>",
+                data: {
+                    id_lead: id_lead
+                },
+                success: (data) => {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    $(() => {
+        $('#table-lead').DataTable();
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+
+        $('.select2').select2();
+    });
+</script>
 </body>
 
 </html>
