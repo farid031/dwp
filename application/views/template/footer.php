@@ -263,6 +263,21 @@
         }
     }
 
+    function hapusProduk(produk_id) {
+        if (window.confirm('Apakah Anda yakin akan menghapus data ini?')) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_produk/hapus_produk'); ?>",
+                data: {
+                    produk_id: produk_id
+                },
+                success: (data) => {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
     $(() => {
         $('#table-lead').DataTable();
         $('#example2').DataTable({

@@ -66,4 +66,30 @@ class M_data extends CI_Model
 
         return $query;
     }
+
+    public function getProdukByAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                produk"
+        );
+
+        return $query;
+    }
+
+    public function getProdukByUser($id_user)
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                customers
+            WHERE
+                AND produk_created_by = ".$id_user
+        );
+
+        return $query;
+    }
 }

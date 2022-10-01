@@ -11,7 +11,7 @@ class C_lead extends CI_Controller
         $this->load->model('M_data');
         if (!empty($this->session->userdata('is_login') == FALSE)) {
             // alert peringatan bahwa harus login
-            $this->session->set_flashdata('failed', 'You are not login yet, please login first...');
+            $this->session->set_flashdata('failed', 'Anda belum login, harap login terlebih dahulu...');
             redirect(base_url('C_login'));
         }
     }
@@ -69,8 +69,8 @@ class C_lead extends CI_Controller
             'cust_pic_telp'     => $no_telp_pic,
             'cust_is_customer'  => false,
             'cust_status'       => 4,
-            'cust_created_by'   => $_SERVER['id'],
-            'cust_created_at'   => date('Y-m-d H:i:s')
+            'cust_updated_by'   => $_SERVER['id'],
+            'cust_updated_at'   => date('Y-m-d H:i:s')
         );
 
         $this->M_data->update_data('customers', $dataLead, 'cust_id = '. $cust_id);

@@ -10,7 +10,7 @@ class C_beranda extends CI_Controller
         parent::__construct();
         if (!empty($this->session->userdata('is_login') == FALSE)) {
             // alert peringatan bahwa harus login
-            $this->session->set_flashdata('failed', 'You are not login yet, please login first...');
+            $this->session->set_flashdata('failed', 'Anda belum login, harap login terlebih dahulu...');
             redirect(base_url('C_login'));
         }
     }

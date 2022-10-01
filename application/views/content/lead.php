@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Data Calon Customer
-            <small>Calon customer PT Smart</small><br />
+            <small>Calon customer PT Smart</small><br /><br/>
             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-tambah-lead">Tambah Data Lead</button>
         </h1>
     </section>

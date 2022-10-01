@@ -41,11 +41,11 @@ class C_login extends CI_Controller
 
                 redirect(base_url('C_beranda'));
             } else {
-                $this->session->set_flashdata('failed', 'Password is wrong...!');
+                $this->session->set_flashdata('failed', 'Password yang Anda masukkan salah...!');
                 redirect(base_url('C_login'));
             }
         } else {
-            $this->session->set_flashdata('failed', 'Username is invalid...!');
+            $this->session->set_flashdata('failed', 'Username tidak terdaftar!');
             redirect(base_url('C_login'));
         }
     }
