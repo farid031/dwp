@@ -77,6 +77,21 @@
                             <i class="fa fa-th"></i> <span>Layanan</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
+                            <i class="fa fa-th"></i> <span>Quotation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
+                            <i class="fa fa-th"></i> <span>Manager Approval</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
+                            <i class="fa fa-th"></i> <span>Customer</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
