@@ -18,7 +18,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table-produk-ditawarkan" class="table table-bordered table-striped">
+                        <table id="table-persetujuan" class="table table-bordered table-striped table-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <table id="table_produk_penawaran" class="table table-bordered table-striped">
+                            <table id="table_produk_penawaran" class="table table-bordered table-striped table-datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -104,8 +104,8 @@
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data->produk_label; ?></td>
-                                            <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-'; ?></td>
-                                            <td><?php echo 'Rp'.number_format($data->pen_det_harga, 0, ',', '.').',-'; ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->produk_harga, 0, ',', '.') . ',-'; ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->pen_det_harga, 0, ',', '.') . ',-'; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

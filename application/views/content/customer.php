@@ -4,8 +4,7 @@
     <section class="content-header">
         <h1>
             Data Calon Customer
-            <small>Calon customer PT Smart</small><br /><br />
-            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-tambah-lead">Tambah Data Lead</button>
+            <small>Calon customer PT Smart</small><br />
         </h1>
     </section>
 
@@ -19,7 +18,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table-lead" class="table table-bordered table-striped">
+                        <table id="table-lead" class="table table-bordered table-striped table-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -27,7 +26,6 @@
                                     <th>Alamat</th>
                                     <th>Nama PIC</th>
                                     <th>No. Telp PIC</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -43,10 +41,10 @@
                                         <td><?php echo $data->cust_alamat ?></td>
                                         <td><?php echo $data->cust_pic_name ?></td>
                                         <td><?php echo $data->cust_pic_telp ?></td>
-                                        <td><?php echo $data->stat_cust_label ?></td>
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-input-penawaran-<?php echo $i ?>" title="Produk Yang Dibeli"><i class="fa fa-info"></i></button></td>
                                     </tr>
-                                <?php $i++;}
+                                <?php $i++;
+                                }
                                 ?>
                             </tbody>
                             <tfoot>
@@ -56,7 +54,6 @@
                                     <th>Alamat</th>
                                     <th>Nama PIC</th>
                                     <th>No. Telp PIC</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -87,7 +84,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <table id="table_produk_dibeli" class="table table-bordered table-striped">
+                            <table id="table_produk_dibeli" class="table table-bordered table-striped table-datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -103,8 +100,8 @@
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data->produk_label; ?></td>
-                                            <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-'; ?></td>
-                                            <td><?php echo 'Rp'.number_format($data->pen_det_harga, 0, ',', '.').',-'; ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->produk_harga, 0, ',', '.') . ',-'; ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->pen_det_harga, 0, ',', '.') . ',-'; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

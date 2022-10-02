@@ -19,7 +19,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table-lead" class="table table-bordered table-striped">
+                        <table id="table-lead" class="table table-bordered table-striped table-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -44,9 +44,12 @@
                                         <td><?php echo $data->cust_pic_name ?></td>
                                         <td><?php echo $data->cust_pic_telp ?></td>
                                         <td><?php echo $data->stat_cust_label ?></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-input-penawaran-<?php echo $i ?>" title="Tambah Penawaran"><i class="fa fa-plus"></i></button> <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-lead-<?php echo $i ?>" title="Edit Data"><i class="fa fa-edit"></i></button> <button class="btn btn-danger" onclick="hapusLead(<?php echo $data->cust_id ?>)" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
+                                        <td><?php if (in_array($data->cust_status, array(2,4))) { ?>
+                                            <a href="<?php echo base_url('C_lead/form_penawaran/'.$data->cust_id) ?>" target="_blank"><button class="btn btn-primary" title="Tambah Penawaran"><i class="fa fa-plus"></i></button></a> <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-lead-<?php echo $i ?>" title="Edit Data"><i class="fa fa-edit"></i></button>
+                                        <?php }?> <button class="btn btn-danger" onclick="hapusLead(<?php echo $data->cust_id ?>)" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
                                     </tr>
-                                <?php $i++;}
+                                <?php $i++;
+                                }
                                 ?>
                             </tbody>
                             <tfoot>
@@ -163,9 +166,7 @@
         <!-- Modal Input Penawaran -->
         <?php
         $z = 0;
-        foreach ($lead->result() as $lead_pen) {
-            $produk = $this->M_data->getProdukPenawaran($lead_pen->cust_id)->result();
-            $produk_ditawarkan = $this->M_data->getProdukPenawaranCust($lead_pen->cust_id)->result(); ?>
+        foreach ($lead->result() as $lead_pen) { ?>
             <div class="modal fade" id="modal-input-penawaran-<?php echo $z; ?>">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -180,7 +181,7 @@
                             <div class="form-group">
                                 <label for="nama_katalog">Nama Produk *</label>
                                 <select id="produk_penawaran_<?php echo $z ?>" class="form-control" data-placeholder="Pilih Produk" style="width: 100%;">
-                                    <?php foreach ($produk as $data) { ?>
+                                    <?php foreach ($produk->result() as $data) { ?>
                                         <option value="<?php echo $data->produk_id; ?>"><?php echo $data->produk_label . ' | Rp' . number_format($data->produk_harga, 0, ',', '.'); ?></option>
                                     <?php } ?>
                                 </select>
@@ -193,7 +194,7 @@
                                 <button onclick="simpanPenawaran('<?php echo $lead_pen->cust_id ?>-<?php echo $z ?>')" class="btn btn-primary">Simpan</button>
                             </div>
 
-                            <table id="table_produk_penawaran" class="table table-bordered table-striped">
+                            <table id="table_produk_penawaran" class="table table-bordered table-striped table-datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -206,12 +207,12 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    foreach ($produk_ditawarkan as $data) { ?>
+                                    foreach ($produk_ditawarkan->result() as $data) { ?>
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data->produk_label; ?></td>
-                                            <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-' ?></td>
-                                            <td><?php echo 'Rp' . number_format($data->pen_det_harga, 0, ',', '.').',-'; ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->produk_harga, 0, ',', '.') . ',-' ?></td>
+                                            <td><?php echo 'Rp' . number_format($data->pen_det_harga, 0, ',', '.') . ',-'; ?></td>
                                             <td>
                                                 <button class="btn btn-danger btn-xs" title="Hapus Produk" onclick="hapusProdukPenawaran('<?php echo $data->pen_det_id ?>')"><i class="fa fa-trash"></i></button>
                                             </td>

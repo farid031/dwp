@@ -20,7 +20,7 @@ class C_persetujuan extends CI_Controller
     {
         $data['content'] = 'content/persetujuan';
         $data['title']     = 'Default';
-        $data['penawaran'] = $this->M_data->getPenawaranByAdmin();
+        $data['penawaran'] = $this->M_data->getPersetujuan();
         
         $this->load->view('template/content', $data);
     }

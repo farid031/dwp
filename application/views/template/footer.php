@@ -292,8 +292,8 @@
                 harga: harga_penawaran
             },
             success: (data) => {
-                window.location.reload();
-                //$('#table_produk_penawaran').DataTable().ajax.reload(null, false);
+                //window.location.reload();
+                $('.table-datatable').DataTable().draw();
             }
         });
     }
@@ -347,20 +347,31 @@
         }
     }
 
+    function closePage() {
+        window.close();
+        window.opener.location.reload();
+    }
+
     $(() => {
-        $('#table-lead').DataTable();
-        $('#table-produk_ditawarkan').DataTable();
-        $('#table-produk_dibeli').DataTable();
-        $('#table_produk_penawaran').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        });
+        $('.table-datatable').DataTable();
 
         $('.select2').select2();
+
+        $('#produk_penawaran').on('change', () => {
+            let id_produk = $('#produk_penawaran option:selected').val();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_lead/get_harga_produk'); ?>",
+                dataType: 'json',
+                data: {
+                    produk_id: id_produk
+                },
+                success: (data) => {
+                    $('#harga_ditawar').val(data.harga);
+                }
+            });
+        })
     });
 </script>
 </body>

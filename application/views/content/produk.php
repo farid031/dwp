@@ -19,7 +19,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table-produk" class="table table-bordered table-striped">
+                        <table id="table-produk" class="table table-bordered table-striped table-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -36,7 +36,7 @@
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $data->produk_label ?></td>
-                                        <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-' ?></td>
+                                        <td><?php echo 'Rp' . number_format($data->produk_harga, 0, ',', '.') . ',-' ?></td>
                                         <td><button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-produk-<?php echo $i++ ?>">Edit</button> <button class="btn btn-danger" onclick="hapusProduk(<?php echo $data->produk_id ?>)">Hapus</button></td>
                                     </tr>
                                 <?php }

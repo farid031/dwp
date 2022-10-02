@@ -20,11 +20,7 @@ class C_produk extends CI_Controller
     {
         $data['content'] = 'content/produk';
         $data['title']     = 'Default';
-        if ($_SESSION['role'] == 1) {
-            $data['produk'] = $this->M_data->getProdukByAdmin();
-        } else {
-            $data['produk'] = $this->M_data->getProdukByUser($_SESSION['id']);
-        }
+        $data['produk'] = $this->M_data->getProdukByAdmin();
         
         $this->load->view('template/content', $data);
     }

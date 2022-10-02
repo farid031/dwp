@@ -81,14 +81,29 @@ class C_lead extends CI_Controller
     {
         $id_lead = $_POST['id_lead'];
 
+        $pen_head = $this->db->get_where('penawaran_header', array('pen_cust_id' => $id_lead))->row();
+
+        $this->M_data->hapus_data('penawaran_detail', 'pen_det_id_head = ' . $pen_head->pen_id);
+        $this->M_data->hapus_data('penawaran_header', 'pen_cust_id = ' . $id_lead);
         $this->M_data->hapus_data('customers', 'cust_id = ' . $id_lead);
     }
 
-    public function simpan_penawaran()
+    public function form_penawaran($cust_id)
     {
-        $produk_id = $_POST['produk_id'];
-        $cust_id = $_POST['cust_id'];
-        $hrg_ditawar = $_POST['harga'];
+        $data['content']    = 'content/form_penawaran';
+        $data['title']      = 'Default';
+        $data['produk']     = $this->M_data->getProdukPenawaran($cust_id);
+        $data['produk_ditawarkan'] = $this->M_data->getProdukPenawaranCust($cust_id);
+        $data['lead']       = $this->db->get_where('customers', array('cust_id' => $cust_id))->row();
+
+        $this->load->view('template/content', $data);
+    }
+
+    public function simpan_penawaran($cust_id)
+    {
+        $post = $this->input->post();
+        $produk_id = $post['produk_penawaran'];
+        $hrg_ditawar = $post['harga_ditawar'];
 
         $pen_header = $this->M_data->getPenawaranHeader($cust_id)->row();
         
@@ -121,6 +136,8 @@ class C_lead extends CI_Controller
             );
             $this->M_data->simpan_data('penawaran_detail', $pen_det);
         }
+
+        redirect(base_url('C_lead/form_penawaran/'.$cust_id), 'refresh');
     }
 
     public function hapus_produk_penawaran()
@@ -128,5 +145,18 @@ class C_lead extends CI_Controller
         $det_id = $_POST['produk_det_id'];
 
         $this->M_data->hapus_data('penawaran_detail', 'pen_det_id = ' . $det_id);
+    }
+
+    public function get_harga_produk()
+    {
+        $produk_id = $_POST['produk_id'];
+
+        $produk = $this->db->get_where('produk', array('produk_id' => $produk_id))->row();
+
+        $arrReturn = array(
+            'harga' => $produk->produk_harga
+        );
+        
+        die(json_encode($arrReturn));
     }
 }
