@@ -39,7 +39,7 @@ class C_produk extends CI_Controller
         $dataProduk = array(
             'produk_label'      => $nama,
             'produk_harga'      => $harga,
-            'produk_created_by' => $_SERVER['id'],
+            'produk_created_by' => $_SESSION['id'],
             'produk_created_at' => date('Y-m-d H:i:s')
         );
 
@@ -57,7 +57,7 @@ class C_produk extends CI_Controller
         $dataProduk = array(
             'produk_label'      => $nama,
             'produk_harga'      => $harga,
-            'produk_updated_by' => $_SERVER['id'],
+            'produk_updated_by' => $_SESSION['id'],
             'produk_updated_at' => date('Y-m-d H:i:s')
         );
 

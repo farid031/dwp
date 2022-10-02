@@ -26,6 +26,7 @@
                                     <th>Alamat</th>
                                     <th>Status Penawaran</th>
                                     <th>Jumlah Produk Yang Ditawarkan</th>
+                                    <th>Pembuat Penawaran</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                         <td><?php echo $data->cust_alamat ?></td>
                                         <td><?php echo $data->status ?></td>
                                         <td><?php echo $data->jml_produk ?></td>
+                                        <td><?php echo $data->pembuat ?></td>
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-produk-penawaran-<?php echo $i++ ?>" title="Lihat Produk Yang Ditawarkan"><i class="fa fa-info"></i></button> <?php if (empty($data->pen_is_approve)) { ?>
                                                 <button class="btn btn-success" onclick="approvePenawaran(<?php echo $data->pen_id ?>)" title="Setujui Penawaran"><i class="fa fa-check"></i></button> <button class="btn btn-danger" onclick="rejectPenawaran(<?php echo $data->pen_id ?>)" title="Tolak Penawaran"><i class="fa fa-times"></i></button>
                                             <?php } ?>
@@ -55,6 +57,7 @@
                                     <th>Alamat</th>
                                     <th>Status Penawaran</th>
                                     <th>Jumlah Produk Yang Ditawarkan</th>
+                                    <th>Pembuat Penawaran</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -101,8 +104,8 @@
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data->produk_label; ?></td>
-                                            <td><?php echo $data->produk_harga; ?></td>
-                                            <td><?php echo $data->pen_det_harga; ?></td>
+                                            <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-'; ?></td>
+                                            <td><?php echo 'Rp'.number_format($data->pen_det_harga, 0, ',', '.').',-'; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <a href="../../index2.html"><b>Farid</b> CRM</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -45,7 +45,7 @@
                     <?php echo $this->session->flashdata('success'); ?>
                 </div>
             <?php } ?>
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Masuk untuk memulai</p>
 
             <form enctype="multipart/form-data" method="post" action="<?php echo base_url('C_login/login') ?>">
                 <div class="form-group has-feedback">
@@ -59,7 +59,7 @@
                 <div>
                     <!-- /.col -->
                     <div class="col-xs-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
                     </div>
                     <!-- /.col -->
                 </div>

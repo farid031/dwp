@@ -192,16 +192,18 @@ class M_data extends CI_Model
                 cust_name,
                 cust_alamat,
                 pen_is_approve,
+                'Diajukan oleh '||cr.user_username||'<br/>pada '||TO_CHAR(pen_created_at, 'DD Mon YYYY HH24:MI:SS') AS pembuat,
                 (SELECT COUNT(*) FROM penawaran_detail WHERE pen_det_id_head = pen_id) AS jml_produk,
                 (CASE 
-                    WHEN pen_is_approve IS TRUE THEN 'Disetujui<br/>Oleh '||user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')
-                    WHEN pen_is_approve IS FALSE THEN 'Ditolak<br/>Oleh '||user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')||'<br/>Alasan tolak: '||pen_reject_note
+                    WHEN pen_is_approve IS TRUE THEN 'Disetujui<br/>Oleh '||appr.user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')
+                    WHEN pen_is_approve IS FALSE THEN 'Ditolak<br/>Oleh '||appr.user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')||'<br/>Alasan tolak: '||pen_reject_note
                     ELSE 'Menunggu Persetujuan'
                 END) AS status
             FROM
                 penawaran_header
                 INNER JOIN customers ON cust_id = pen_cust_id
-                LEFT JOIN users ON user_id = pen_approved_by"
+                LEFT JOIN users AS appr ON appr.user_id = pen_approved_by
+                LEFT JOIN users AS cr ON cr.user_id = pen_created_by"
         );
 
         return $query;
@@ -215,16 +217,19 @@ class M_data extends CI_Model
                 cust_id,
                 cust_name,
                 cust_alamat,
+                pen_is_approve,
+                'Diajukan oleh '||cr.user_username||'<br/>pada '||TO_CHAR(pen_created_at, 'DD Mon YYYY HH24:MI:SS') AS pembuat,
                 (SELECT COUNT(*) FROM penawaran_detail WHERE pen_det_id_head = pen_id) AS jml_produk,
                 (CASE 
-                    WHEN pen_is_approve IS TRUE THEN 'Disetujui<br/>Oleh '||user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')
-                    WHEN pen_is_approve IS FALSE THEN 'Ditolak<br/>Oleh '||user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')||'<br/>Alasan tolak: '||pen_reject_note
+                    WHEN pen_is_approve IS TRUE THEN 'Disetujui<br/>Oleh '||appr.user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')
+                    WHEN pen_is_approve IS FALSE THEN 'Ditolak<br/>Oleh '||appr.user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')||'<br/>Alasan tolak: '||pen_reject_note
                     ELSE 'Menunggu Persetujuan'
                 END) AS status
             FROM
                 penawaran_header
                 INNER JOIN customers ON cust_id = pen_cust_id
-                LEFT JOIN users ON user_id = pen_approved_by
+                LEFT JOIN users AS appr ON appr.user_id = pen_approved_by
+                LEFT JOIN users AS cr ON cr.user_id = pen_created_by
             WHERE
                 pen_created_by = ".$user_id
         );
@@ -279,7 +284,7 @@ class M_data extends CI_Model
     public function getCountCalonCustUser()
     {
         $query = $this->db->query(
-            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS FALSE AND cust_created = ".$_SESSION['id']
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS FALSE AND cust_created_by = ".$_SESSION['id']
         );
 
         return $query;
@@ -312,6 +317,15 @@ class M_data extends CI_Model
         return $query;
     }
 
+    public function getCountPersetujuan()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM penawaran_header"
+        );
+
+        return $query;
+    }
+
     public function getCountCustAdmin()
     {
         $query = $this->db->query(
@@ -324,7 +338,7 @@ class M_data extends CI_Model
     public function getCountCustUser()
     {
         $query = $this->db->query(
-            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS TRUE AND cust_created = " . $_SESSION['id']
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS TRUE AND cust_created_by = " . $_SESSION['id']
         );
 
         return $query;

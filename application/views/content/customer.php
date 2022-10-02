@@ -103,8 +103,8 @@
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data->produk_label; ?></td>
-                                            <td><?php echo $data->produk_harga; ?></td>
-                                            <td><?php echo $data->pen_det_harga; ?></td>
+                                            <td><?php echo 'Rp'.number_format($data->produk_harga, 0, ',', '.').',-'; ?></td>
+                                            <td><?php echo 'Rp'.number_format($data->pen_det_harga, 0, ',', '.').',-'; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

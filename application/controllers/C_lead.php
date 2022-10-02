@@ -45,7 +45,7 @@ class C_lead extends CI_Controller
             'cust_pic_telp'     => $no_telp_pic,
             'cust_is_customer'  => false,
             'cust_status'       => 4,
-            'cust_created_by'   => $_SERVER['id'],
+            'cust_created_by'   => $_SESSION['id'],
             'cust_created_at'   => date('Y-m-d H:i:s')
         );
 
@@ -69,7 +69,7 @@ class C_lead extends CI_Controller
             'cust_pic_telp'     => $no_telp_pic,
             'cust_is_customer'  => false,
             'cust_status'       => 4,
-            'cust_updated_by'   => $_SERVER['id'],
+            'cust_updated_by'   => $_SESSION['id'],
             'cust_updated_at'   => date('Y-m-d H:i:s')
         );
 

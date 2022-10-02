@@ -25,11 +25,13 @@ class C_beranda extends CI_Controller
             $data['calon_cust'] = $this->M_data->getCountCalonCustAdmin()->row();
             $data['produk'] = $this->M_data->getCountProduk()->row();
             $data['penawaran'] = $this->M_data->getCountPenawaranAdmin()->row();
+            $data['persetujuan'] = $this->M_data->getCountPersetujuan()->row();
             $data['customer'] = $this->M_data->getCountCustAdmin()->row();
         } else {
             $data['calon_cust'] = $this->M_data->getCountCalonCustUser()->row();
             $data['produk'] = $this->M_data->getCountProduk()->row();
             $data['penawaran'] = $this->M_data->getCountPenawaranUser()->row();
+            $data['persetujuan'] = $this->M_data->getCountPersetujuan()->row();
             $data['customer'] = $this->M_data->getCountCustUser()->row();
         }
 
