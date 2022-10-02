@@ -328,6 +328,21 @@
         }
     }
 
+    function hapusUser(user_id) {
+        if (window.confirm('Apakah Anda yakin akan menghapus pengguna ini?')) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_user/hapus_user'); ?>",
+                data: {
+                    user_id: user_id
+                },
+                success: (data) => {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
     function rejectPenawaran(pen_id) {
         if (window.confirm('Apakah Anda yakin akan menolak penawaran ini?')) {
             let alasan = prompt('Alasan Penolakan');
@@ -345,6 +360,65 @@
                 });
             }
         }
+    }
+
+    function tambahUser() {
+        let username = $('#username_tambah').val();
+        let role = $('#role_tambah').val();
+        let pass = $('#pass_tambah').val();
+        let repass = $('#repass_tambah').val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('C_user/tambah_user'); ?>",
+            //dataType: 'json',
+            data: {
+                username: username,
+                role    : role,
+                pass    : pass,
+                repass  : repass
+            },
+            success: (data) => {
+                const msg = data.replace('\r\n', '');
+                if (msg == 'sukses') {
+                    window.location.reload();
+                } else {
+                    const alert = '<span style="color: red; font-weight: bold;">' + msg + '</span>';
+
+                    $('#alert_add_user').replaceWith(alert);
+                }
+            }
+        });
+    }
+
+    function ubahUser(user_id, idx) {
+        let username = $('#username_ubah_'+idx).val();
+        let role = $('#role_ubah_'+idx).val();
+        let pass = $('#pass_ubah_'+idx).val();
+        let repass = $('#repass_ubah_'+idx).val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('C_user/ubah_user'); ?>",
+            //dataType: 'json',
+            data: {
+                username: username,
+                role    : role,
+                pass    : pass,
+                repass  : repass,
+                user_id : user_id
+            },
+            success: (data) => {
+                const msg = data.replace('\r\n', '');
+                if (msg == 'sukses') {
+                    window.location.reload();
+                } else {
+                    const alert = '<span style="color: red; font-weight: bold;">' + msg + '</span>';
+
+                    $('#alert_add_user').replaceWith(alert);
+                }
+            }
+        });
     }
 
     function closePage() {

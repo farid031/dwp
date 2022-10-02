@@ -370,4 +370,33 @@ class M_data extends CI_Model
 
         return $query;
     }
+
+    public function getUser()
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                users
+                LEFT JOIN user_role ON user_role.usr_role_id = users.user_role_id
+            ORDER BY
+                user_created_at DESC"
+        );
+
+        return $query;
+    }
+
+    public function getUserRole()
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                user_role
+            ORDER BY
+                usr_role_id ASC"
+        );
+
+        return $query;
+    }
 }

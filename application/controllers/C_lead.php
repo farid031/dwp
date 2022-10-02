@@ -157,6 +157,6 @@ class C_lead extends CI_Controller
             'harga' => $produk->produk_harga
         );
         
-        die(json_encode($arrReturn));
+        echo json_encode($arrReturn);
     }
 }
