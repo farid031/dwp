@@ -110,11 +110,19 @@
                             </a>
                         </li>
                     <?php } ?>
-                    <li>
-                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
-                            <i class="fa fa-th"></i> <span>Manager Approval</span>
-                        </a>
-                    </li>
+                    <?php if ($this->uri->segment(1) == 'C_persetujuan') { ?>
+                        <li class="active">
+                            <a href="<?php echo base_url('C_persetujuan') ?>">
+                                <i class="fa fa-check"></i> <span>Manager Approval</span>
+                            </a>
+                        </li>
+                    <?php } else { ?>
+                        <li>
+                            <a href="<?php echo base_url('C_persetujuan') ?>">
+                                <i class="fa fa-check"></i> <span>Manager Approval</span>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
                             <i class="fa fa-th"></i> <span>Customer</span>

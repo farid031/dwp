@@ -45,7 +45,10 @@ class M_data extends CI_Model
                 customers
                 LEFT JOIN customer_status ON cust_status = stat_cust_id
             WHERE
-                cust_is_customer IS NOT TRUE"
+                cust_is_customer IS NOT TRUE
+                AND cust_status != 1
+            ORDER BY
+                stat_cust_id DESC"
         );
 
         return $query;
@@ -61,7 +64,10 @@ class M_data extends CI_Model
                 LEFT JOIN customer_status ON cust_status = stat_cust_id
             WHERE
                 cust_is_customer IS NOT TRUE
-                AND cust_created_by = ".$id_user
+                AND cust_status != 1
+                AND cust_created_by = ".$id_user."
+            ORDER BY
+                stat_cust_id DESC"
         );
 
         return $query;

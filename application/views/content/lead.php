@@ -44,9 +44,9 @@
                                         <td><?php echo $data->cust_pic_name ?></td>
                                         <td><?php echo $data->cust_pic_telp ?></td>
                                         <td><?php echo $data->stat_cust_label ?></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-input-penawaran-<?php echo $i++ ?>" title="Tambah Penawaran"><i class="fa fa-plus"></i></button> <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-lead-<?php echo $i++ ?>" title="Edit Data"><i class="fa fa-edit"></i></button> <button class="btn btn-danger" onclick="hapusLead(<?php echo $data->cust_id ?>)" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-input-penawaran-<?php echo $i ?>" title="Tambah Penawaran"><i class="fa fa-plus"></i></button> <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-lead-<?php echo $i ?>" title="Edit Data"><i class="fa fa-edit"></i></button> <button class="btn btn-danger" onclick="hapusLead(<?php echo $data->cust_id ?>)" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
                                     </tr>
-                                <?php }
+                                <?php $i++;}
                                 ?>
                             </tbody>
                             <tfoot>

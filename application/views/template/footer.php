@@ -313,6 +313,40 @@
         }
     }
 
+    function approvePenawaran(pen_id) {
+        if (window.confirm('Apakah Anda yakin akan menyetujui penawaran ini?')) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_persetujuan/approve_penawaran'); ?>",
+                data: {
+                    pen_id: pen_id
+                },
+                success: (data) => {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    function rejectPenawaran(pen_id) {
+        if (window.confirm('Apakah Anda yakin akan menolak penawaran ini?')) {
+            let alasan = prompt('Alasan Penolakan');
+            if (alasan != null) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('C_persetujuan/reject_penawaran'); ?>",
+                    data: {
+                        pen_id: pen_id,
+                        alasan: alasan
+                    },
+                    success: (data) => {
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+    }
+
     $(() => {
         $('#table-lead').DataTable();
         $('#table-produk_ditawarkan').DataTable();

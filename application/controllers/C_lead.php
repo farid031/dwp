@@ -100,6 +100,8 @@ class C_lead extends CI_Controller
             );
 
             $this->M_data->simpan_data('penawaran_detail', $pen_det);
+
+            $this->M_data->update_data('customers', array('cust_status' => 2), 'cust_id = ' . $cust_id);
         } else {
             $pen_head = array(
                 'pen_cust_id'    => $cust_id,
@@ -107,6 +109,8 @@ class C_lead extends CI_Controller
                 'pen_created_at' => date('Y-m-d H:i:s')
             );
             $this->M_data->simpan_data('penawaran_header', $pen_head);
+
+            $this->M_data->update_data('customers', array('cust_status' => 2), 'cust_id = ' . $cust_id);
 
             $data_pen_head = $this->db->get_where('penawaran_header', array('pen_cust_id' => $cust_id))->row();
 
