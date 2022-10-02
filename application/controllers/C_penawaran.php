@@ -2,7 +2,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class C_lead extends CI_Controller
+class C_penawaran extends CI_Controller
 {
 
     public function __construct()
@@ -18,12 +18,12 @@ class C_lead extends CI_Controller
 
     public function index()
     {
-        $data['content'] = 'content/lead';
+        $data['content'] = 'content/penawaran';
         $data['title']     = 'Default';
         if ($_SESSION['role'] == 1) {
-            $data['lead'] = $this->M_data->getLeadByAdmin();
+            $data['penawaran'] = $this->M_data->getPenawaranByAdmin();
         } else {
-            $data['lead'] = $this->M_data->getLeadByUser($_SESSION['id']);
+            $data['penawaran'] = $this->M_data->getPenawaranByUser($_SESSION['id']);
         }
         
         $this->load->view('template/content', $data);
@@ -82,47 +82,5 @@ class C_lead extends CI_Controller
         $id_lead = $_POST['id_lead'];
 
         $this->M_data->hapus_data('customers', 'cust_id = ' . $id_lead);
-    }
-
-    public function simpan_penawaran()
-    {
-        $produk_id = $_POST['produk_id'];
-        $cust_id = $_POST['cust_id'];
-        $hrg_ditawar = $_POST['harga'];
-
-        $pen_header = $this->M_data->getPenawaranHeader($cust_id)->row();
-        
-        if (!empty($pen_header)) {
-            $pen_det = array(
-                'pen_det_id_head' => $pen_header->pen_id,
-                'pen_det_produk_id' => $produk_id,
-                'pen_det_harga' => $hrg_ditawar
-            );
-
-            $this->M_data->simpan_data('penawaran_detail', $pen_det);
-        } else {
-            $pen_head = array(
-                'pen_cust_id'    => $cust_id,
-                'pen_created_by' => $_SESSION['id'],
-                'pen_created_at' => date('Y-m-d H:i:s')
-            );
-            $this->M_data->simpan_data('penawaran_header', $pen_head);
-
-            $data_pen_head = $this->db->get_where('penawaran_header', array('pen_cust_id' => $cust_id))->row();
-
-            $pen_det = array(
-                'pen_det_id_head'   => $data_pen_head->pen_id,
-                'pen_det_produk_id' => $produk_id,
-                'pen_det_harga'     => $hrg_ditawar
-            );
-            $this->M_data->simpan_data('penawaran_detail', $pen_det);
-        }
-    }
-
-    public function hapus_produk_penawaran()
-    {
-        $det_id = $_POST['produk_det_id'];
-
-        $this->M_data->hapus_data('penawaran_detail', 'pen_det_id = ' . $det_id);
     }
 }

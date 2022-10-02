@@ -71,7 +71,7 @@
                     <?php } else { ?>
                         <li><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
                     <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_lead') { ?> 
+                    <?php if ($this->uri->segment(1) == 'C_lead') { ?>
                         <li class="active">
                             <a href="<?php echo base_url('C_lead') ?>">
                                 <i class="fa fa-user-plus"></i> <span>Lead</span>
@@ -84,7 +84,7 @@
                             </a>
                         </li>
                     <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_produk') { ?> 
+                    <?php if ($this->uri->segment(1) == 'C_produk') { ?>
                         <li class="active">
                             <a href="<?php echo base_url('C_produk') ?>">
                                 <i class="fa fa-database"></i> <span>Produk</span>
@@ -97,11 +97,19 @@
                             </a>
                         </li>
                     <?php } ?>
-                    <li>
-                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
-                            <i class="fa fa-th"></i> <span>Quotation</span>
-                        </a>
-                    </li>
+                    <?php if ($this->uri->segment(1) == 'C_penawaran') { ?>
+                        <li class="active">
+                            <a href="<?php echo base_url('C_penawaran') ?>">
+                                <i class="fa fa-file"></i> <span>Quotation</span>
+                            </a>
+                        </li>
+                    <?php } else { ?>
+                        <li>
+                            <a href="<?php echo base_url('C_penawaran') ?>">
+                                <i class="fa fa-file"></i> <span>Quotation</span>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
                             <i class="fa fa-th"></i> <span>Manager Approval</span>

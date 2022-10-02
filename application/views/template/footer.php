@@ -278,9 +278,45 @@
         }
     }
 
+    function simpanPenawaran(params) {
+        let param = params.split('-');
+        const cust_id = param[0];
+        const produk_id = $("#produk_penawaran_" + param[1]).val();
+        const harga_penawaran = $("#harga_ditawar_" + param[1]).val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('C_lead/simpan_penawaran'); ?>",
+            data: {
+                produk_id: produk_id,
+                cust_id: cust_id,
+                harga: harga_penawaran
+            },
+            success: (data) => {
+                window.location.reload();
+                //$('#table_produk_penawaran').DataTable().ajax.reload(null, false);
+            }
+        });
+    }
+
+    function hapusProdukPenawaran(produk_det_id) {
+        if (window.confirm('Apakah Anda yakin akan menghapus data ini?')) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('C_lead/hapus_produk_penawaran'); ?>",
+                data: {
+                    produk_det_id: produk_det_id
+                },
+                success: (data) => {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
     $(() => {
         $('#table-lead').DataTable();
-        $('#example2').DataTable({
+        $('#table-produk_ditawarkan').DataTable();
+        $('#table_produk_penawaran').DataTable({
             'paging': true,
             'lengthChange': false,
             'searching': false,
