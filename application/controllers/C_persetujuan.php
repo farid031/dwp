@@ -39,7 +39,11 @@ class C_persetujuan extends CI_Controller
 
         $this->M_data->update_data('penawaran_header', $penUpd, 'pen_id = '.$pen_id);
 
-        $this->M_data->update_data('customers', array('cust_status' => 1), 'cust_id = ' . $penawaran->pen_cust_id);
+        $arrCust = array(
+            'cust_status' => 1,
+            'cust_is_customer' => true
+        );
+        $this->M_data->update_data('customers', $arrCust, 'cust_id = ' . $penawaran->pen_cust_id);
     }
 
     public function reject_penawaran()
@@ -57,6 +61,9 @@ class C_persetujuan extends CI_Controller
 
         $this->M_data->update_data('penawaran_header', $penUpd, 'pen_id = ' . $pen_id);
 
-        $this->M_data->update_data('customers', array('cust_status' => 3), 'cust_id = ' . $penawaran->pen_cust_id);
+        $arrCust = array(
+            'cust_status' => 3
+        );
+        $this->M_data->update_data('customers', $arrCust, 'cust_id = ' . $penawaran->pen_cust_id);
     }
 }

@@ -16,7 +16,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?php echo $calon_cust->jml ?></h3>
 
                         <p>Total Calon Customer</p>
                     </div>
@@ -31,14 +31,14 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?php echo $produk->jml ?></h3>
 
                         <p>Total Produk</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                        <i class="ion ion-android-list"></i>
                     </div>
-                    <a href="<?php echo base_url('C_admin_catalog') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('C_produk') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -46,14 +46,14 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?php echo $penawaran->jml ?></h3>
 
                         <p>Total Penawaran</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="<?php echo base_url('C_admin_setting_jns_sertifikat') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('C_penawaran') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -61,14 +61,14 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?php echo $customer->jml ?></h3>
 
                         <p>Total Customer</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="ion ion-person"></i>
                     </div>
-                    <a href="<?php echo base_url('C_admin_setting_user') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('C_customer') ?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

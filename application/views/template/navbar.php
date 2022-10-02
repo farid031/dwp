@@ -66,68 +66,88 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-                    <?php if ($this->uri->segment(1) == 'C_beranda') { ?>
-                        <li class="active"><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-                    <?php } else { ?>
-                        <li><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-                    <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_lead') { ?>
+                    <?php if (in_array($_SESSION['role'], array(1,2,3))) {
+                        if ($this->uri->segment(1) == 'C_beranda') { ?>
+                            <li class="active"><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                        <?php } else { ?>
+                            <li><a href="<?php echo base_url('C_beranda') ?>"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                        <?php }
+                    } ?>
+                    <?php if (in_array($_SESSION['role'], array(1, 3))) {
+                            if ($this->uri->segment(1) == 'C_lead') { ?>
+                            <li class="active">
+                                <a href="<?php echo base_url('C_lead') ?>">
+                                    <i class="fa fa-user-plus"></i> <span>Lead</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a href="<?php echo base_url('C_lead') ?>">
+                                    <i class="fa fa-user-plus"></i> <span>Lead</span>
+                                </a>
+                            </li>
+                        <?php }
+                    } ?>
+                    <?php if (in_array($_SESSION['role'], array(1, 3))) {
+                            if ($this->uri->segment(1) == 'C_produk') { ?>
+                            <li class="active">
+                                <a href="<?php echo base_url('C_produk') ?>">
+                                    <i class="fa fa-database"></i> <span>Produk</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a href="<?php echo base_url('C_produk') ?>">
+                                    <i class="fa fa-database"></i> <span>Produk</span>
+                                </a>
+                            </li>
+                        <?php }
+                    } ?>
+                    <?php if (in_array($_SESSION['role'], array(1, 3))) {
+                            if ($this->uri->segment(1) == 'C_penawaran') { ?>
+                            <li class="active">
+                                <a href="<?php echo base_url('C_penawaran') ?>">
+                                    <i class="fa fa-file"></i> <span>Quotation</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a href="<?php echo base_url('C_penawaran') ?>">
+                                    <i class="fa fa-file"></i> <span>Quotation</span>
+                                </a>
+                            </li>
+                        <?php }
+                    } ?>
+                    <?php if (in_array($_SESSION['role'], array(1, 2))) {
+                            if ($this->uri->segment(1) == 'C_persetujuan') { ?>
+                            <li class="active">
+                                <a href="<?php echo base_url('C_persetujuan') ?>">
+                                    <i class="fa fa-check"></i> <span>Manager Approval</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a href="<?php echo base_url('C_persetujuan') ?>">
+                                    <i class="fa fa-check"></i> <span>Manager Approval</span>
+                                </a>
+                            </li>
+                        <?php }
+                    } ?>
+                    <?php if (in_array($_SESSION['role'], array(1, 3))) {
+                        if ($this->uri->segment(1) == 'C_customer') { ?>
                         <li class="active">
-                            <a href="<?php echo base_url('C_lead') ?>">
-                                <i class="fa fa-user-plus"></i> <span>Lead</span>
+                            <a href="<?php echo base_url('C_customer') ?>">
+                                <i class="fa fa-users"></i> <span>Customer</span>
                             </a>
                         </li>
                     <?php } else { ?>
                         <li>
-                            <a href="<?php echo base_url('C_lead') ?>">
-                                <i class="fa fa-user-plus"></i> <span>Lead</span>
+                            <a href="<?php echo base_url('C_customer') ?>">
+                                <i class="fa fa-users"></i> <span>Customer</span>
                             </a>
                         </li>
-                    <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_produk') { ?>
-                        <li class="active">
-                            <a href="<?php echo base_url('C_produk') ?>">
-                                <i class="fa fa-database"></i> <span>Produk</span>
-                            </a>
-                        </li>
-                    <?php } else { ?>
-                        <li>
-                            <a href="<?php echo base_url('C_produk') ?>">
-                                <i class="fa fa-database"></i> <span>Produk</span>
-                            </a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_penawaran') { ?>
-                        <li class="active">
-                            <a href="<?php echo base_url('C_penawaran') ?>">
-                                <i class="fa fa-file"></i> <span>Quotation</span>
-                            </a>
-                        </li>
-                    <?php } else { ?>
-                        <li>
-                            <a href="<?php echo base_url('C_penawaran') ?>">
-                                <i class="fa fa-file"></i> <span>Quotation</span>
-                            </a>
-                        </li>
-                    <?php } ?>
-                    <?php if ($this->uri->segment(1) == 'C_persetujuan') { ?>
-                        <li class="active">
-                            <a href="<?php echo base_url('C_persetujuan') ?>">
-                                <i class="fa fa-check"></i> <span>Manager Approval</span>
-                            </a>
-                        </li>
-                    <?php } else { ?>
-                        <li>
-                            <a href="<?php echo base_url('C_persetujuan') ?>">
-                                <i class="fa fa-check"></i> <span>Manager Approval</span>
-                            </a>
-                        </li>
-                    <?php } ?>
-                    <li>
-                        <a href="<?php echo base_url('assets/template/pages/widgets.html') ?>">
-                            <i class="fa fa-th"></i> <span>Customer</span>
-                        </a>
-                    </li>
+                    <?php }
+                } ?>
                 </ul>
             </section>
             <!-- /.sidebar -->

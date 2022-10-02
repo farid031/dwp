@@ -191,6 +191,7 @@ class M_data extends CI_Model
                 cust_id,
                 cust_name,
                 cust_alamat,
+                pen_is_approve,
                 (SELECT COUNT(*) FROM penawaran_detail WHERE pen_det_id_head = pen_id) AS jml_produk,
                 (CASE 
                     WHEN pen_is_approve IS TRUE THEN 'Disetujui<br/>Oleh '||user_username||' pada '||TO_CHAR(pen_approved_at, 'DD Mon YYYY HH24:MI:SS')
@@ -226,6 +227,104 @@ class M_data extends CI_Model
                 LEFT JOIN users ON user_id = pen_approved_by
             WHERE
                 pen_created_by = ".$user_id
+        );
+
+        return $query;
+    }
+
+    public function getCustByAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                customers
+                LEFT JOIN customer_status ON cust_status = stat_cust_id
+            WHERE
+                cust_is_customer IS TRUE
+            ORDER BY
+                stat_cust_id DESC"
+        );
+
+        return $query;
+    }
+
+    public function getCustByUser($id_user)
+    {
+        $query = $this->db->query(
+            "SELECT
+                *
+            FROM
+                customers
+                LEFT JOIN customer_status ON cust_status = stat_cust_id
+            WHERE
+                cust_is_customer IS TRUE
+                AND cust_created_by = " . $id_user . "
+            ORDER BY
+                stat_cust_id DESC"
+        );
+
+        return $query;
+    }
+
+    public function getCountCalonCustAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS FALSE"
+        );
+
+        return $query;
+    }
+
+    public function getCountCalonCustUser()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS FALSE AND cust_created = ".$_SESSION['id']
+        );
+
+        return $query;
+    }
+
+    public function getCountProduk()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM produk"
+        );
+
+        return $query;
+    }
+
+    public function getCountPenawaranAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM penawaran_header"
+        );
+
+        return $query;
+    }
+
+    public function getCountPenawaranUser()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM penawaran_header WHERE pen_created_by = " . $_SESSION['id']
+        );
+
+        return $query;
+    }
+
+    public function getCountCustAdmin()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS TRUE"
+        );
+
+        return $query;
+    }
+
+    public function getCountCustUser()
+    {
+        $query = $this->db->query(
+            "SELECT COUNT(*) AS jml FROM customers WHERE cust_is_customer IS TRUE AND cust_created = " . $_SESSION['id']
         );
 
         return $query;

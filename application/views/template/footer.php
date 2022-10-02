@@ -350,6 +350,7 @@
     $(() => {
         $('#table-lead').DataTable();
         $('#table-produk_ditawarkan').DataTable();
+        $('#table-produk_dibeli').DataTable();
         $('#table_produk_penawaran').DataTable({
             'paging': true,
             'lengthChange': false,

@@ -3,8 +3,9 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Data Penawaran
-            <small>penawaran PT Smart</small><br /><br />
+            Data Calon Customer
+            <small>Calon customer PT Smart</small><br /><br />
+            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-tambah-lead">Tambah Data Lead</button>
         </h1>
     </section>
 
@@ -14,38 +15,38 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Penawaran PT Smart</h3>
+                        <h3 class="box-title">Calon customer PT Smart</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="table-produk-ditawarkan" class="table table-bordered table-striped">
+                        <table id="table-lead" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Perusahaan</th>
                                     <th>Alamat</th>
-                                    <th>Status Penawaran</th>
-                                    <th>Jumlah Produk Yang Ditawarkan</th>
+                                    <th>Nama PIC</th>
+                                    <th>No. Telp PIC</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
+                                $this->load->model('M_data');
                                 $no = 1;
                                 $i = 0;
-                                foreach ($penawaran->result() as $data) { ?>
+                                foreach ($customer->result() as $data) { ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $data->cust_name ?></td>
                                         <td><?php echo $data->cust_alamat ?></td>
-                                        <td><?php echo $data->status ?></td>
-                                        <td><?php echo $data->jml_produk ?></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-produk-penawaran-<?php echo $i++ ?>" title="Lihat Produk Yang Ditawarkan"><i class="fa fa-info"></i></button> <?php if (empty($data->pen_is_approve)) { ?>
-                                                <button class="btn btn-success" onclick="approvePenawaran(<?php echo $data->pen_id ?>)" title="Setujui Penawaran"><i class="fa fa-check"></i></button> <button class="btn btn-danger" onclick="rejectPenawaran(<?php echo $data->pen_id ?>)" title="Tolak Penawaran"><i class="fa fa-times"></i></button>
-                                            <?php } ?>
-                                        </td>
+                                        <td><?php echo $data->cust_pic_name ?></td>
+                                        <td><?php echo $data->cust_pic_telp ?></td>
+                                        <td><?php echo $data->stat_cust_label ?></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modal-input-penawaran-<?php echo $i ?>" title="Produk Yang Dibeli"><i class="fa fa-info"></i></button></td>
                                     </tr>
-                                <?php }
+                                <?php $i++;}
                                 ?>
                             </tbody>
                             <tfoot>
@@ -53,8 +54,9 @@
                                     <th>No</th>
                                     <th>Nama Perusahaan</th>
                                     <th>Alamat</th>
-                                    <th>Status Penawaran</th>
-                                    <th>Jumlah Produk Yang Ditawarkan</th>
+                                    <th>Nama PIC</th>
+                                    <th>No. Telp PIC</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -68,24 +70,24 @@
         </div>
         <!-- /.row -->
 
-        <!-- Modal Produk Penawaran -->
+        <!-- Modal Penawaran -->
         <?php
         $z = 0;
-        foreach ($penawaran->result() as $pen) {
-            $produk = $this->M_data->getProdukPenawaran($pen->cust_id)->result();
-            $produk_ditawarkan = $this->M_data->getProdukPenawaranCust($pen->cust_id)->result(); ?>
-            <div class="modal fade" id="modal-produk-penawaran-<?php echo $z; ?>">
+        foreach ($customer->result() as $cust) {
+            $produk = $this->M_data->getProdukPenawaran($cust->cust_id)->result();
+            $produk_ditawarkan = $this->M_data->getProdukPenawaranCust($cust->cust_id)->result(); ?>
+            <div class="modal fade" id="modal-input-penawaran-<?php echo $z; ?>">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Produk Yang Ditawarkan ke <?php echo $pen->cust_name ?></h4>
+                            <h4 class="modal-title">Data Produk Yang Dibeli Oleh <?php echo $cust->cust_name ?></h4>
                         </div>
 
                         <div class="modal-body">
-                            <table id="table_produk_penawaran" class="table table-bordered table-striped">
+                            <table id="table_produk_dibeli" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -128,7 +130,7 @@
         <?php $z++;
         }
         ?>
-        <!-- End Modal Produk Penawaran -->
+        <!-- End Modal Penawaran -->
     </section>
     <!-- /.content -->
 </div>
